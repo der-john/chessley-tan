@@ -64,7 +64,7 @@ def board2numpyarray(b, flip=False):
         A NumPy array that represents a board state
     """
     x = numpy.zeros(64, dtype=numpy.int8)
-    for pos in xrange(64):
+    for pos in range(64):
         curr_piece = b.piece_at(pos)
         if curr_piece is None:
             continue

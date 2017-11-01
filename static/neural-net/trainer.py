@@ -68,7 +68,7 @@ def get_data(series=["board", "board_rand"]):
     Returns:
         2 item array object in the format [training_set, testing_set]
     """
-    data = [[] for i in xrange(len(series))]
+    data = [[] for i in range(len(series))]
     for f in load_data():
         try:
             for index, name in enumerate(series):
@@ -141,7 +141,7 @@ def get_parameters(n_in=None, n_hidden_units=2048, n_hidden_layers=1, weights=No
                 high = numpy.sqrt(6. / (n_in + n_out)),
                 size = (n_in, n_out)), dtype=pconst.NP_FLOAT)
 
-        for i in xrange(n_hidden_layers):
+        for i in range(n_hidden_layers):
             tmp_in = n_in
             weight = None
             bias = None
@@ -193,7 +193,7 @@ def get_model(weight_set, bias_set, dropout=False):
     binary_layer = tf.concat(1, pieces)
     last_layer = binary_layer
     n = len(weight_set)
-    for index in xrange(n - 1):
+    for index in range(n - 1):
         intermediary = tf.matmul(last_layer, weight_set[index]) + bias_set[index]
         intermediary = intermediary * tf.cast((intermediary > 0),
                 pconst.FLOAT_TYPE)
@@ -322,7 +322,7 @@ def get_function(weight_set, bias_set, dropout=False, update=False):
     if update:
         assert(len(weight_set) == len(bias_set))
         params = []
-        for i in xrange(len(weight_set)):
+        for i in range(len(weight_set)):
             params.append(tf.add(weight_set[i], bias_set[i]))
         updates = nesterov_update(objective, params, learning_rate, momentum)
     func = tfunc.function(
@@ -366,7 +366,7 @@ def train(print_boards=False):
     base_learning_rate = 0.03
     t_i = time.time() # Initial time
 
-    for i in xrange(10):
+    for i in range(10):
         learning_rate = base_learning_rate * math.exp(-(time.time() - t_i) / 86400) # 8640 = # of seconds in a day
 
         batch_index = random.randint(0, int(curr_train.shape[0] / BATCH_SIZE) - 1)
