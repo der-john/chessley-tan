@@ -130,7 +130,7 @@ class Computer(Player):
         t0 = time.time()
         best_value, best_move = negamax(self._pos, depth, alpha, beta, 1, self._func)
         crdn = sunfish.render(best_move[0]) + sunfish.render(best_move[1])
-        print depth, best_value, crdn, time.time() - t0
+        print(depth, best_value, crdn, time.time() - t0)
 
         self._pos = self._pos.move(best_move)
         crdn = sunfish.render(best_move[0]) + sunfish.render(best_move[1])
@@ -148,22 +148,22 @@ class Human(Player):
     def move(self, gn_current):
         bb = gn_current.board()
 
-        print bb
+        print(bb)
 
         def get_move(move_str):
             try:
                 move = chess.Move.from_uci(move_str)
             except:
-                print 'cant parse'
+                print('cant parse')
                 return False
             if move not in bb.legal_moves:
-                print 'not a legal move'
+                print('not a legal move')
                 return False
             else:
                 return move
 
         while True:
-            print 'your turn:'
+            print('your turn:')
             move = get_move(raw_input())
             if move:
                 break
@@ -192,7 +192,7 @@ class Sunfish(Player):
 
         t0 = time.time()
         move, score = sunfish.search(self._pos, maxn=self._maxn)
-        print time.time() - t0, move, score
+        print(time.time() - t0, move, score)
         self._pos = self._pos.move(move)
 
         crdn = sunfish.render(119-move[0]) + sunfish.render(119 - move[1])
@@ -210,7 +210,7 @@ def game(func):
     maxd = random.randint(1, 2) # max depth for deep pink
     maxn = 10 ** (2.0 + random.random() * 1.0) # max nodes for sunfish
 
-    print 'maxd %f maxn %f' % (maxd, maxn)
+    print('maxd %f maxn %f'%(maxd, maxn))
 
     player_a = Computer(func, maxd=maxd)
     player_b = Human()
@@ -229,9 +229,9 @@ def game(func):
                 return side + '-exception', times
 
             times[side] += time.time() - t0
-            print '=========== Player %s: %s' % (side, gn_current.move)
+            print('=========== Player %s: %s'%(side, gn_current.move))
             s = str(gn_current.board())
-            print s
+            print(s)
             if gn_current.board().is_checkmate():
                 return side, times
             elif gn_current.board().is_stalemate():

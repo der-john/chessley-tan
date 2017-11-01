@@ -346,8 +346,8 @@ def train(print_boards=False):
     curr_train, curr_test, rand_train, rand_test, parent_train, parent_test = get_data(["board", "board_rand", "board_parent"])
     if print_boards:
         for board in [curr_train[0], parent_train[0]]:
-            for row in xrange(8):
-                print ' '.join("%d" % x for x in board[(row * 8):((row + 1) * 8)])
+            for row in range(8):
+                print(' '.join("%d" % x for x in board[(row * 8):((row + 1) * 8)]))
             print
 
     size = 12*64
@@ -378,16 +378,16 @@ def train(print_boards=False):
                 parent_train[lo:hi],
                 learning_rate])
         # Print training info
-        print "Iteration: %4d\tLearning rate: %.4f\tLoss: %.4f\tReg: %.4f" % (i,
-                learning_rate, loss_net, reg)
+        print("Iteration: %4d\tLearning rate: %.4f\tLoss: %.4f\tReg: %.4f"%(i,
+                learning_rate, loss_net, reg))
         if i % 200 == 0:
             test_loss, test_reg, _, _, _ = test_func([curr_test, rand_test,
                     parent_test, learning_rate])
             if test_loss < min_test_loss:
-                print "MINIMUM LOSS: %.4f" % (test_loss)
+                print("MINIMUM LOSS: %.4f" % (test_loss))
                 min_test_loss = test_loss
 
-                print "Dumping upgraded model"
+                print("Dumping upgraded model")
                 fout = open('model.chessley', 'w')
                 def values(set_x):
                     return [x.eval(session=sess) for x in set_x]
