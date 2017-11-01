@@ -8,5 +8,5 @@ FLOAT_TYPE = tf.float32
 NP_FLOAT = numpy.float32
 TEST_SIZE_MAX = 10000.0
 GAMMA = 0.1
-TFTENSOR_CLASS = tf.python.framework.ops.Tensor
+TFTENSOR_CLASS = tf.Tensor
 
