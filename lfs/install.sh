@@ -12,9 +12,7 @@ fi
 mkdir -p $prefix/bin
 
 rm -rf $prefix/bin/git-lfs*
-for g in git*; do
-  install $g "$prefix/bin/$g"
-done
+install git-lfs "$prefix/bin/git-lfs"
 
 PATH+=:$prefix/bin
 git lfs install
